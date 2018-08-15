@@ -40,6 +40,19 @@
         android:inputType="phone"/>
 </LinearLayout>
 
+<Spinner
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/main_spinner"
+    android:autofillHints="Choose Occupation">
+</Spinner>
+
+    <AutoCompleteTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/main_autoCompleteTextView"
+        android:hint="Type State"/>
+
     <EditText
         android:id="@+id/main_messageEditText"
         android:layout_width="match_parent"

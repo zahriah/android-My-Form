@@ -3,17 +3,22 @@ package my.edu.utem.myform;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 
 public class MainActivity extends AppCompatActivity {
     EditText nameEditText, emailEditText, phoneEditText, cellEditText, messageEditText;
-
+Spinner spinner;
+AutoCompleteTextView stateAuto;
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
@@ -65,6 +70,16 @@ public class MainActivity extends AppCompatActivity {
         phoneEditText = findViewById(R.id.main_phoneEditText);
         cellEditText = findViewById(R.id.main_cellEditText);
         messageEditText = findViewById(R.id.main_messageEditText);
+
+        spinner = findViewById(R.id.main_spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(MainActivity.this, R.array.occupations, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
+        stateAuto = findViewById(R.id.main_autoCompleteTextView);
+        ArrayAdapter<CharSequence> adapterAuto = ArrayAdapter.createFromResource(MainActivity.this, R.array.state, android.R.layout.simple_list_item_1);
+        adapterAuto.setDropDownViewResource((android.R.layout.simple_spinner_dropdown_item));
+        stateAuto.setAdapter(adapterAuto);
     }
 
     public void buttonPressed(View view) {
@@ -74,6 +89,10 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("phone", phoneEditText.getText().toString());
         intent.putExtra("cell", cellEditText.getText().toString());
         intent.putExtra("message", messageEditText.getText().toString());
+        String selectedState = stateAuto.getText().toString();
+        String selectedOccupation = (String)(spinner.getSelectedItem());
+        Log.d("debug", "Selected state is " + selectedState);
+        Log.d("debug", "Selected occupation is " + selectedOccupation);
         startActivity(intent);
     }
 }
